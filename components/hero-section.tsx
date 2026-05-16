@@ -18,11 +18,11 @@ export default function HeroSection() {
         {/* Left content */}
         <div className="flex flex-1 flex-col gap-6 lg:gap-8">
           <h1 className="font-serif text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl lg:text-6xl">
-            Professional Chiropractic Care For Better Movement, Pain Relief &amp; Wellness
+            Move Better. Live Pain Free.
           </h1>
           <p className="max-w-lg text-base leading-relaxed text-muted-foreground lg:text-lg">
             Safe, personalized chiropractic treatments designed to restore
-            balance, improve posture, and help you live pain-free.
+            balance, improve posture, and support long-term wellness.
           </p>
 
           <div className="flex flex-wrap gap-3">
