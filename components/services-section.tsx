@@ -62,9 +62,10 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="bg-secondary py-20 lg:py-28">
+    <section id="services" className="bg-secondary/50 py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <div className="mx-auto mb-4 h-px w-12 bg-primary/60" />
           <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
             Our Chiropractic &amp; Wellness Services
           </h2>
@@ -78,7 +79,7 @@ export default function ServicesSection() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group flex flex-col gap-4 rounded-xl bg-card p-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5"
+              className="group flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-6 transition-all hover:shadow-md hover:-translate-y-0.5"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                 <service.icon className="h-5 w-5 text-primary" />

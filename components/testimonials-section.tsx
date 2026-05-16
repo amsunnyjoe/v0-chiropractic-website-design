@@ -36,9 +36,10 @@ export default function TestimonialsSection() {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section id="testimonials" className="bg-secondary py-20 lg:py-28">
+    <section id="testimonials" className="bg-secondary/50 py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <div className="mx-auto mb-4 h-px w-12 bg-primary/60" />
           <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
             What Our Clients Say
           </h2>
@@ -49,7 +50,7 @@ export default function TestimonialsSection() {
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="flex flex-col gap-5 rounded-xl bg-card p-7 shadow-sm"
+              className="flex flex-col gap-5 rounded-xl border border-border/60 bg-card p-7"
             >
               <div className="flex gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -84,7 +85,7 @@ export default function TestimonialsSection() {
 
         {/* Mobile: carousel */}
         <div className="md:hidden">
-          <div className="flex flex-col gap-5 rounded-xl bg-card p-7 shadow-sm">
+          <div className="flex flex-col gap-5 rounded-xl border border-border/60 bg-card p-7">
             <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star

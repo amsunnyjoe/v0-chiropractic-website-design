@@ -25,13 +25,13 @@ const benefits = [
 
 export default function BenefitsSection() {
   return (
-    <section className="bg-secondary py-20 lg:py-28">
+    <section className="border-t border-border/50 bg-background py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="group flex flex-col items-center gap-4 rounded-xl bg-card p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+              className="group flex flex-col items-center gap-4 rounded-xl border border-border/60 bg-card p-8 text-center transition-shadow hover:shadow-md"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
                 <benefit.icon className="h-6 w-6 text-primary" />

@@ -3,9 +3,10 @@ import Link from "next/link";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-background py-20 lg:py-28">
+    <section id="contact" className="bg-secondary/50 py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <div className="mx-auto mb-4 h-px w-12 bg-primary/60" />
           <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
             Contact Divine Chiro Care
           </h2>

@@ -12,9 +12,10 @@ const reassurance = [
 
 export default function AppointmentSection() {
   return (
-    <section id="appointment" className="bg-secondary py-20 lg:py-28">
+    <section id="appointment" className="bg-background py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <div className="mx-auto mb-4 h-px w-12 bg-primary/60" />
           <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
             Request An Appointment
           </h2>
@@ -28,7 +29,7 @@ export default function AppointmentSection() {
           {/* Form */}
           <div className="flex-1">
             <form
-              className="flex flex-col gap-5 rounded-2xl bg-card p-8 shadow-sm"
+              className="flex flex-col gap-5 rounded-2xl border border-border/60 bg-card p-8"
               onSubmit={(e) => e.preventDefault()}
             >
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -152,7 +153,7 @@ export default function AppointmentSection() {
               {reassurance.map((item) => (
                 <div
                   key={item.text}
-                  className="flex items-center gap-3 rounded-xl bg-card p-4 shadow-sm"
+                  className="flex items-center gap-3 rounded-xl border border-border/60 bg-card p-4"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <item.icon className="h-5 w-5 text-primary" />

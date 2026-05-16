@@ -11,7 +11,7 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground py-16">
+    <footer className="border-t border-border bg-foreground py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-col gap-12 md:flex-row md:justify-between">
           {/* Brand */}

@@ -12,7 +12,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-background pt-28 pb-16 lg:pt-36 lg:pb-24"
+      className="relative overflow-hidden bg-background pt-28 pb-14 lg:pt-36 lg:pb-20"
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 px-6 lg:flex-row lg:gap-16 lg:px-8">
         {/* Left content */}

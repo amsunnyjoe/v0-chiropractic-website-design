@@ -13,7 +13,7 @@ const reasons = [
 
 export default function WhyChooseSection() {
   return (
-    <section className="bg-background py-20 lg:py-28">
+    <section className="bg-background py-20 lg:py-24">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-12 px-6 lg:flex-row lg:gap-20 lg:px-8">
         {/* Left image */}
         <div className="relative w-full flex-1">

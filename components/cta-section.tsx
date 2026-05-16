@@ -2,8 +2,9 @@ import Link from "next/link";
 
 export default function CtaSection() {
   return (
-    <section className="bg-secondary py-24 lg:py-32">
+    <section className="bg-background py-20 lg:py-24">
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+        <div className="mx-auto mb-6 h-px w-12 bg-primary/60" />
         <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl lg:text-5xl">
           Take The First Step Toward Better Movement &amp; Wellness
         </h2>
