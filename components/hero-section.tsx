@@ -57,10 +57,10 @@ export default function HeroSection() {
         <div className="relative flex-1">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-[3/4]">
             <Image
-              src="/images/hero-chiro.jpg"
-              alt="Professional chiropractic care treatment session"
+              src="/images/practitioner-neck.png"
+              alt="Divine Chiro Care practitioner performing cervical adjustment"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

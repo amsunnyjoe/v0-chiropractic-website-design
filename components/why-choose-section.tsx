@@ -19,10 +19,10 @@ export default function WhyChooseSection() {
         <div className="relative w-full flex-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             <Image
-              src="/images/why-choose.jpg"
-              alt="Chiropractic treatment at Divine Chiro Care"
+              src="/images/practitioner-treatment.png"
+              alt="Divine Chiro Care practitioner providing arm treatment to a patient"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>

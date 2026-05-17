@@ -16,10 +16,10 @@ export default function AboutSection() {
         <div className="relative w-full flex-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             <Image
-              src="/images/about-chiro.jpg"
-              alt="About Divine Chiro Care professional"
+              src="/images/practitioner-portrait.jpg"
+              alt="Dr. Samuel Oguche, chiropractor and founder of Divine Chiro Care"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
