@@ -6,7 +6,7 @@ export default function CtaSection() {
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
         <div className="mx-auto mb-6 h-px w-12 bg-primary/60" />
         <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl lg:text-5xl">
-          Take The First Step Toward Better Movement &amp; Wellness
+          Take The First Step Toward Better Movement and Wellness
         </h2>
         <div className="mt-8">
           <Link

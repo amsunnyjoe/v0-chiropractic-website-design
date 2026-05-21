@@ -4,12 +4,12 @@ const benefits = [
   {
     icon: Activity,
     title: "Spinal Alignment",
-    description: "Improve posture & body balance",
+    description: "Improve posture and body balance",
   },
   {
     icon: Heart,
     title: "Pain Relief",
-    description: "Natural relief for neck & back pain",
+    description: "Natural relief for neck and back pain",
   },
   {
     icon: Home,
@@ -19,7 +19,7 @@ const benefits = [
   {
     icon: Leaf,
     title: "Wellness Support",
-    description: "Personalized recovery & wellness plans",
+    description: "Personalized recovery and wellness plans",
   },
 ];
 

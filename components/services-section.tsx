@@ -12,7 +12,7 @@ import {
 const services = [
   {
     icon: Bone,
-    title: "Chiropractic Care & Spinal Adjustment",
+    title: "Chiropractic Care and Spinal Adjustment",
     description:
       "Expert spinal adjustments to relieve pain, improve alignment, and restore natural function.",
   },
@@ -24,7 +24,7 @@ const services = [
   },
   {
     icon: Activity,
-    title: "Neck & Back Pain Relief",
+    title: "Neck and Back Pain Relief",
     description:
       "Targeted treatments for chronic or acute neck and back discomfort using proven techniques.",
   },
@@ -36,13 +36,13 @@ const services = [
   },
   {
     icon: HandHeart,
-    title: "Joint & Muscle Therapy",
+    title: "Joint and Muscle Therapy",
     description:
       "Gentle joint mobilization and muscle therapy for improved flexibility and reduced stiffness.",
   },
   {
     icon: Dumbbell,
-    title: "Wellness & Rehabilitation Exercises",
+    title: "Wellness and Rehabilitation Exercises",
     description:
       "Guided exercises to strengthen your body, speed recovery, and maintain long-term wellness.",
   },
@@ -67,7 +67,7 @@ export default function ServicesSection() {
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <div className="mx-auto mb-4 h-px w-12 bg-primary/60" />
           <h2 className="font-serif text-3xl font-bold text-foreground text-balance md:text-4xl">
-            Our Chiropractic &amp; Wellness Services
+            Our Chiropractic and Wellness Services
           </h2>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             Personalized treatment solutions designed to improve movement,

@@ -31,7 +31,7 @@ export default function AboutSection() {
             About Divine Chiro Care
           </span>
           <h2 className="font-serif text-3xl font-bold leading-tight text-foreground text-balance md:text-4xl">
-            Dedicated To Natural Healing &amp; Better Living
+            Dedicated To Natural Healing and Better Living
           </h2>
           <p className="leading-relaxed text-muted-foreground">
             At Divine Chiro Care, we believe in the body&apos;s natural ability

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import {
   CalendarDays,
@@ -10,6 +10,8 @@ import {
   CheckCircle2,
   Loader2,
 } from "lucide-react";
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mpqndqqd";
 
 const reassurance = [
   { icon: MessageCircle, text: "Personalized care" },
@@ -45,18 +47,35 @@ function validate(form: FormData): FieldErrors {
   return errors;
 }
 
+function parseFormspreeError(data: unknown): string {
+  if (data && typeof data === "object") {
+    const payload = data as {
+      error?: string;
+      errors?: Array<{ message?: string }>;
+    };
+    if (payload.error) return payload.error;
+    const message = payload.errors?.[0]?.message;
+    if (message) return message;
+  }
+  return "Something went wrong. Please try again.";
+}
+
 export default function AppointmentSection() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [serverError, setServerError] = useState("");
+  const isSubmitting = status === "submitting";
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
     const fieldErrors = validate(formData);
     if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors);
+      setServerError("");
       return;
     }
 
@@ -64,24 +83,40 @@ export default function AppointmentSection() {
     setServerError("");
     setStatus("submitting");
 
+    formData.append("_subject", "New Appointment Request — Divine Chiro Care");
+
     try {
-      const res = await fetch("https://formspree.io/f/Samueloguche774@gmail.com", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },
       });
 
       if (res.ok) {
+        form.reset();
         setStatus("success");
-      } else {
-        const data = await res.json();
-        setServerError(data?.errors?.[0]?.message || "Something went wrong. Please try again.");
-        setStatus("error");
+        return;
       }
+
+      let message = "Something went wrong. Please try again.";
+      try {
+        message = parseFormspreeError(await res.json());
+      } catch {
+        // Non-JSON error response from Formspree
+      }
+      setServerError(message);
+      setStatus("error");
     } catch {
       setServerError("Network error. Please check your connection and try again.");
       setStatus("error");
     }
+  }
+
+  function handleSubmitAnother() {
+    setStatus("idle");
+    setErrors({});
+    setServerError("");
+    formRef.current?.reset();
   }
 
   if (status === "success") {
@@ -101,7 +136,8 @@ export default function AppointmentSection() {
               and discuss your treatment needs.
             </p>
             <button
-              onClick={() => setStatus("idle")}
+              type="button"
+              onClick={handleSubmitAnother}
               className="mt-2 inline-flex items-center rounded-lg border border-border bg-card px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
               Submit Another Request
@@ -126,16 +162,21 @@ export default function AppointmentSection() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-14 xl:gap-16">
           {/* Form */}
-          <div className="flex-1">
+          <div className="min-w-0">
             <form
+              ref={formRef}
               className="flex flex-col gap-5 rounded-2xl border border-border/60 bg-card p-8"
               onSubmit={handleSubmit}
               noValidate
+              aria-busy={isSubmitting}
             >
-              {serverError && (
-                <div className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              {serverError && status === "error" && (
+                <div
+                  role="alert"
+                  className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                >
                   {serverError}
                 </div>
               )}
@@ -150,12 +191,17 @@ export default function AppointmentSection() {
                     name="fullName"
                     type="text"
                     placeholder="Your full name"
-                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring ${
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.fullName)}
+                    aria-describedby={errors.fullName ? "fullName-error" : undefined}
+                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60 ${
                       errors.fullName ? "border-destructive" : "border-input"
                     }`}
                   />
                   {errors.fullName && (
-                    <p className="text-xs text-destructive">{errors.fullName}</p>
+                    <p id="fullName-error" className="text-xs text-destructive">
+                      {errors.fullName}
+                    </p>
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
@@ -167,12 +213,17 @@ export default function AppointmentSection() {
                     name="phone"
                     type="tel"
                     placeholder="+234..."
-                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring ${
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60 ${
                       errors.phone ? "border-destructive" : "border-input"
                     }`}
                   />
                   {errors.phone && (
-                    <p className="text-xs text-destructive">{errors.phone}</p>
+                    <p id="phone-error" className="text-xs text-destructive">
+                      {errors.phone}
+                    </p>
                   )}
                 </div>
               </div>
@@ -187,12 +238,17 @@ export default function AppointmentSection() {
                     name="email"
                     type="email"
                     placeholder="your@email.com"
-                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring ${
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60 ${
                       errors.email ? "border-destructive" : "border-input"
                     }`}
                   />
                   {errors.email && (
-                    <p className="text-xs text-destructive">{errors.email}</p>
+                    <p id="email-error" className="text-xs text-destructive">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
@@ -202,7 +258,10 @@ export default function AppointmentSection() {
                   <select
                     id="service"
                     name="service"
-                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring ${
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.service)}
+                    aria-describedby={errors.service ? "service-error" : undefined}
+                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60 ${
                       errors.service ? "border-destructive" : "border-input"
                     }`}
                     defaultValue=""
@@ -210,17 +269,19 @@ export default function AppointmentSection() {
                     <option value="" disabled>
                       Select a service
                     </option>
-                    <option>Chiropractic Care &amp; Spinal Adjustment</option>
+                    <option>Chiropractic Care and Spinal Adjustment</option>
                     <option>Full Body Alignment</option>
-                    <option>Neck &amp; Back Pain Relief</option>
+                    <option>Neck and Back Pain Relief</option>
                     <option>Posture Correction</option>
-                    <option>Joint &amp; Muscle Therapy</option>
-                    <option>Wellness &amp; Rehabilitation</option>
+                    <option>Joint and Muscle Therapy</option>
+                    <option>Wellness and Rehabilitation</option>
                     <option>Home Service Session</option>
                     <option>Personalized Treatment Plan</option>
                   </select>
                   {errors.service && (
-                    <p className="text-xs text-destructive">{errors.service}</p>
+                    <p id="service-error" className="text-xs text-destructive">
+                      {errors.service}
+                    </p>
                   )}
                 </div>
               </div>
@@ -234,12 +295,17 @@ export default function AppointmentSection() {
                     id="date"
                     name="date"
                     type="date"
-                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring ${
+                    disabled={isSubmitting}
+                    aria-invalid={Boolean(errors.date)}
+                    aria-describedby={errors.date ? "date-error" : undefined}
+                    className={`rounded-lg border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60 ${
                       errors.date ? "border-destructive" : "border-input"
                     }`}
                   />
                   {errors.date && (
-                    <p className="text-xs text-destructive">{errors.date}</p>
+                    <p id="date-error" className="text-xs text-destructive">
+                      {errors.date}
+                    </p>
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
@@ -251,7 +317,8 @@ export default function AppointmentSection() {
                     name="location"
                     type="text"
                     placeholder="Your area in Lagos"
-                    className="rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring"
+                    disabled={isSubmitting}
+                    className="rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
                   />
                 </div>
               </div>
@@ -265,16 +332,17 @@ export default function AppointmentSection() {
                   name="concern"
                   rows={4}
                   placeholder="Tell us about your pain or wellness goals..."
-                  className="resize-none rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring"
+                  disabled={isSubmitting}
+                  className="resize-none rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-60"
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={status === "submitting"}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+                disabled={isSubmitting}
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {status === "submitting" ? (
+                {isSubmitting ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
                     Sending...
@@ -287,17 +355,17 @@ export default function AppointmentSection() {
           </div>
 
           {/* Right side */}
-          <div className="flex flex-1 flex-col gap-8">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+          <div className="flex min-w-0 flex-col gap-6 lg:gap-7">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border/40 bg-muted/15 shadow-sm">
               <Image
-                src="/images/appointment.jpg"
-                alt="Wellness consultation at Divine Chiro Care"
+                src="/images/practitioner-table-treatment-2.png"
+                alt="Chiropractor providing table treatment to a patient at Divine Chiro Care"
                 fill
-                className="object-cover"
+                className="object-cover object-[48%_40%] sm:object-[50%_38%] lg:object-[50%_42%]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid shrink-0 grid-cols-2 gap-3 sm:gap-4">
               {reassurance.map((item) => (
                 <div
                   key={item.text}

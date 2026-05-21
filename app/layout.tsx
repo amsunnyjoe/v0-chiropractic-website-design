@@ -7,7 +7,7 @@ const _inter = Inter({ subsets: ["latin"] });
 const _playfair = Playfair_Display({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Divine Chiro Care | Professional Chiropractic & Wellness",
+  title: "Divine Chiro Care | Professional Chiropractic and Wellness",
   description:
     "Safe, personalized chiropractic treatments designed to restore balance, improve posture, and help you live pain-free. Based in Lagos, Nigeria.",
 };

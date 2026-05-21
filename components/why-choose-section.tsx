@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 
 const reasons = [
-  "Safe & Natural Care",
+  "Safe and Natural Care",
   "Personalized Treatments",
   "Relaxing Environment",
   "Mobile Home Service",
