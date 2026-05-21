@@ -22,7 +22,7 @@ export default function ContactSection() {
               <div>
                 <h3 className="text-sm font-semibold text-foreground">Phone</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  +234 801 234 5678
+                +234 803 316 0714
                 </p>
               </div>
             </div>
@@ -34,7 +34,7 @@ export default function ContactSection() {
               <div>
                 <h3 className="text-sm font-semibold text-foreground">Email</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  hello@divinechirocare.com
+                divinechiropracticservices@gmail.com
                 </p>
               </div>
             </div>
