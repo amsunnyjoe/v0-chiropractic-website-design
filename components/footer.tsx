@@ -51,13 +51,13 @@ export default function Footer() {
               Contact
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-background/60">
-              <li>+234 801 234 5678</li>
-              <li>hello@divinechirocare.com</li>
+              <li>+234 803 316 0714</li>
+              <li>divinechiropracticservices@gmail.com</li>
               <li>Lagos, Nigeria</li>
             </ul>
             <div className="flex gap-4 pt-2">
               <Link
-                href="https://instagram.com/divinechirocare"
+                href=" https://www.instagram.com/divinechiropracticcare"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-background/60 transition-colors hover:text-background"
@@ -65,7 +65,7 @@ export default function Footer() {
                 Instagram
               </Link>
               <Link
-                href="https://tiktok.com/@divinechirocare"
+                href="https://www.tiktok.com/@divinechiropracticcare"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-background/60 transition-colors hover:text-background"
@@ -73,7 +73,7 @@ export default function Footer() {
                 TikTok
               </Link>
               <Link
-                href="https://wa.me/2348012345678"
+                href="https://wa.me/2348033160714"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-background/60 transition-colors hover:text-background"
