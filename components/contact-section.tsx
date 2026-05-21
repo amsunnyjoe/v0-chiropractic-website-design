@@ -66,7 +66,7 @@ export default function ContactSection() {
                 WhatsApp
               </Link>
               <Link
-                href="https://instagram.com/divinechirocare"
+                href="https://www.instagram.com/divinechiropracticcare"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
@@ -74,7 +74,7 @@ export default function ContactSection() {
                 Instagram
               </Link>
               <Link
-                href="https://tiktok.com/@divinechirocare"
+                href="https://www.tiktok.com/@divinechiropracticcare"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
