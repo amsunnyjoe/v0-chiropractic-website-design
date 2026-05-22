@@ -55,7 +55,7 @@ export default function ContactSection() {
 
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
-                href="https://wa.me/2348012345678"
+                href="https://wa.me/2348033160714"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
